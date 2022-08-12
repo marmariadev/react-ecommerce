@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const Products = () => {
     const [data, setData] = useState([]);
@@ -28,13 +30,28 @@ const Products = () => {
     }, []);
 
     const Loading = () => {
-        return (<div>Loading...</div>);
+        return (
+            <>
+                <div className="col-md-3">
+                    <Skeleton height={350} />
+                </div>
+                <div className="col-md-3">
+                    <Skeleton height={350} />
+                </div>
+                <div className="col-md-3">
+                    <Skeleton height={350} />
+                </div>
+                <div className="col-md-3">
+                    <Skeleton height={350} />
+                </div>
+            </>
+        );
     }
 
     const ShowProducts = () => {
         return (
             <>
-                <div className="buttons d-flex justify-content-center mb-5 pb-5">
+                <div className="buttons d-flex justify-content-center mb-5">
                     <button className="btn btn-outline-dark me-2" onClick={() => setFilter(data)}>All</button>
                     <button className="btn btn-outline-dark me-2" onClick={() => setFilter(data)}>Men's Clothing</button>
                     <button className="btn btn-outline-dark" onClick={() => setFilter(data)}>Women's Clothing</button>
