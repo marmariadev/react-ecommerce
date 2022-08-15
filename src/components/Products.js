@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import { Link } from "react-router-dom";
 
@@ -8,26 +8,16 @@ const Products = () => {
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState([]);
     const [loading, setLoading] = useState(true);
-    let componentMounted = true;
 
     useEffect(() => {
-        const getProducts = async () => {
-            setLoading(true);
+        const fetchData = async () => {
             const response = await fetch("https://fakestoreapi.com/products");
-
-            if (componentMounted) {
-                const data = await response.json();
-                setData(data);
-                setFilter(data);
-                setLoading(false);
-            }
-
-            return () => {
-                componentMounted = false;
-            }
+            const body = await response.json();
+            setData(body);
+            setFilter(body);
+            setLoading(false);
         }
-
-        getProducts();
+        fetchData();
     }, []);
 
     const Loading = () => {
